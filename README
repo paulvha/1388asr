@@ -1,0 +1,49 @@
+﻿Version 1.0 / paulvha / april 2016
+
+This is a driver + example code to display message on a 1388asr
+
+For detailed information about this project see the display_1388asr.odt file.
+
+Installation instructions
+
+Depending on the library you want to use either first install BCM2835 library or the wiringPi. WiringPi is slower and requires root permissions to run, but is more common used.
+
+wiringPi library
+0. cd /home/pi 
+1. git clone git://git.drogon.net/wiringPi
+
+#make the utilities
+2. cd wiringPi
+3. ./build
+
+#create a static library in the right place !!!! important !!!!
+4. cd wiringPi	# again to next sub-directory!!!
+5. make static
+6. sudo make install-static
+
+….OR...
+
+BCM2835 library
+Install latest from BCM2835 from : http://www.airspayce.com/mikem/bcm2835/
+0. cd /home/pi 
+1. wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.50.tar.gz
+2. tar -zxf bcm2835-1.50.tar.g     #1.50 is version at the time of writing
+3. cd bcm2835-1.50
+4. ./configure
+5. sudo make check
+6. sudo make install
+
+Install the 1388asr  utilities/ library
+1. cd /home/pi
+2. tar -xzvf 1388asr.tar.gz
+3. cd  1388asr
+
+To use the BCM2835 :  
+	copy bcm2835.h from bcm2835-1.50/src to 1388asr directory
+	./build_led bcm
+		
+		OR
+
+To use the wiringPi library :  ./build_led pi
+
+./testled will start ONE of the examples: ask for a your string to display and will show that rolling on the display.  There are more examples in led_ex.c, but these have been commented out and can be used for your references.
